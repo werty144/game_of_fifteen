@@ -1,0 +1,26 @@
+#:kivy 1.0.9
+
+<MenuScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: (0.7, 0.3)
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+        Button:
+            on_press: root.manager.transition.direction = 'left'; root.manager.current = 'playground'
+            text: 'Play'
+        Button:
+            on_press: app.stop()
+            text: 'Quit'
+
+<Playground>:
+    Label:
+        text: "huy"
+        font_size: 70
+        center_x: root.width * 3 / 4
+        top: root.top - 50
+
+<PlaygroundScreen>:
+    Button:
+        on_press: root.manager.transition.direction = 'right'; root.manager.current = 'menu'
+        text: 'Menu'
+        size_hint: (0.2, 0.1)
