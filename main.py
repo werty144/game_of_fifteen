@@ -16,15 +16,15 @@ class GameScreen(Screen):
     win_label = ObjectProperty()
 
     def on_enter(self, *args):
-        playground = Playground()
-        self.playground = playground
-        self.add_widget(playground)
+        self.playground = Playground()
+        self.win_label = Label(text='You win!', pos_hint={'center_x': 0.5, 'center_y': 0.5}, font_size=72,
+                               halign='center')
+        self.add_widget(self.playground)
 
     def on_leave(self, *args):
         self.clear_widgets([self.win_label, self.playground])
 
     def win(self):
-        self.win_label = Label(text='You win!', pos_hint={'center_x': 0.5, 'center_y': 0.5}, font_size=72, halign='center')
         self.remove_widget(self.playground)
         self.add_widget(self.win_label)
 
