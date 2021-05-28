@@ -9,8 +9,46 @@
             on_press: root.manager.transition.direction = 'left'; root.manager.current = 'game'
             text: 'Play'
         Button:
+            on_press: root.manager.transition.direction = 'left'; root.manager.current = 'record'
+            text: 'Records'
+        Button:
             on_press: app.stop()
             text: 'Quit'
+
+
+<RecordScreen>:
+    BoxLayout:
+        size_hint: (0.7, 0.6)
+        pos_hint: {'center_x': 0.5, 'center_y': 0.6}
+        orientation: 'vertical'
+        Label:
+            size_hint_y: 0.3
+            text: 'Top 3 records'
+            font_size: 64
+        BoxLayout:
+            orientation: 'vertical'
+            Label:
+                id: fst
+                text_size: self.size
+                halign: 'center'
+                valign: 'middle'
+                font_size: 36
+            Label:
+                id: snd
+                text_size: self.size
+                halign: 'center'
+                valign: 'middle'
+                font_size: 36
+            Label:
+                id: thrd
+                text_size: self.size
+                halign: 'center'
+                valign: 'middle'
+                font_size: 36
+    Button:
+        on_press: root.manager.transition.direction = 'right'; root.manager.current = 'menu'
+        text: 'Menu'
+        size_hint: (0.1, 0.1)
 
 <Playground>:
     size_hint_y: 0.95
@@ -24,3 +62,9 @@
         on_press: root.manager.transition.direction = 'right'; root.manager.current = 'menu'
         text: 'Menu'
         size_hint: (0.1, 0.1)
+    Label:
+        id: time_label
+        font_size: 24
+        text: '0:00'
+        size_hint: (0.1, 0.1)
+        pos: (0, root.height - self.height)
