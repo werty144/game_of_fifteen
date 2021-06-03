@@ -1,22 +1,41 @@
 #:kivy 1.0.9
 
 <MenuScreen>:
+    canvas:
+        Color:
+            rgba: 239/255, 195/255, 172/255, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
     BoxLayout:
+        spacing: 3
         orientation: 'vertical'
         size_hint: (0.7, 0.3)
         pos_hint: {'center_x': 0.5, 'center_y': 0.5}
         Button:
+            background_normal: ''
+            background_color: 224/255, 99/255, 106/255, 1
             on_press: root.manager.transition.direction = 'left'; root.manager.current = 'game'
             text: 'Play'
         Button:
+            background_normal: ''
+            background_color: 224/255, 99/255, 106/255, 1
             on_press: root.manager.transition.direction = 'left'; root.manager.current = 'record'
             text: 'Records'
         Button:
+            background_normal: ''
+            background_color: 224/255, 99/255, 106/255, 1
             on_press: app.stop()
             text: 'Quit'
 
 
 <RecordScreen>:
+    canvas:
+        Color:
+            rgba: 239/255, 195/255, 172/255, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
     BoxLayout:
         size_hint: (0.7, 0.6)
         pos_hint: {'center_x': 0.5, 'center_y': 0.6}
@@ -46,11 +65,19 @@
                 valign: 'middle'
                 font_size: 36
     Button:
+        background_normal: ''
+        background_color: 224/255, 99/255, 106/255, 1
         on_press: root.manager.transition.direction = 'right'; root.manager.current = 'menu'
         text: 'Menu'
         size_hint: (0.1, 0.1)
 
 <Playground>:
+    canvas:
+        Color:
+            rgba: 239/255, 195/255, 172/255, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
     size_hint_y: 0.95
     width: self.height
     pos_hint: {'center_x': 0.5, 'center_y': 0.5}
@@ -58,10 +85,18 @@
 
 
 <GameScreen>:
+    canvas:
+        Color:
+            rgba: 239/255, 195/255, 172/255, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
     Button:
         on_press: root.manager.transition.direction = 'right'; root.manager.current = 'menu'
         text: 'Menu'
         size_hint: (0.1, 0.1)
+        background_normal: ''
+        background_color: 224/255, 99/255, 106/255, 1
     Label:
         id: time_label
         font_size: 24
