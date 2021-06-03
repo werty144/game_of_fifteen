@@ -2,6 +2,7 @@ from kivy.app import App
 from kivy.clock import Clock
 from kivy.properties import NumericProperty, ObjectProperty
 from kivy.storage.jsonstore import JsonStore
+from kivy.uix.image import Image
 from kivy.uix.label import Label
 from kivy.uix.widget import Widget
 from kivy.uix.screenmanager import ScreenManager, Screen
@@ -109,9 +110,14 @@ class Playground(Widget):
         self.bind(pos=self.draw_tiles)
         self.line_width = 2
         self.field = generate_solvable_permutation()
-        # self.field = [[j + 1 for j in range(4 * i, 4 * (i + 1))] for i in range(4)]
+        self.field = [[j + 1 for j in range(4 * i, 4 * (i + 1))] for i in range(4)]
         self.tiles = []
+        self.labels = []
+        self.load_tiles()
         super().__init__(**kwargs)
+
+    def load_tiles(self, *args):
+        self.tiles = [Image(source=f'images/kapibara/{i}.jpg') for i in range(1, 16)]
 
     def create_grid(self, *args):
         self.canvas.clear()
@@ -157,14 +163,23 @@ class Playground(Widget):
         cell_size = self.width // 4
         return self.x + cell_size * (j + 0.5), self.y + self.height - cell_size * (i + 0.5)
 
+    def get_cell_pos(self, i, j):
+        return self.x + self.width*(j/4) + self.line_width, self.y + self.height * ((3 - i)/4) + self.line_width
+
     def draw_tiles(self, *args):
-        self.clear_widgets(self.tiles)
+        self.clear_widgets(self.tiles + self.labels)
         for i in range(4):
             for j in range(4):
                 if self.field[i][j] == 16:
                     continue
                 x, y = self.get_cell_center(i, j)
-                self.add_widget(Label(text=f'{self.field[i][j]}', center=(x, y), font_size=24))
+                cur_tile = self.tiles[self.field[i][j] - 1]
+                cur_tile.pos = self.get_cell_pos(i, j)
+                image_width = (self.width - 4 * self.line_width) // 4
+                cur_tile.size = (image_width, image_width)
+                self.add_widget(cur_tile)
+                self.labels.append(Label(text=f'{self.field[i][j]}', center=(x, y), font_size=24))
+                self.add_widget(self.labels[-1])
 
     def check_win(self):
         if self.field == [[j + 1 for j in range(4*i, 4*(i + 1))] for i in range(4)]:
